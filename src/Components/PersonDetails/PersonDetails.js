@@ -1,7 +1,12 @@
 import React from 'react';
 
-const PersonDetails = ({ personDetails }) => {
-    const { ID, Name, Location, Date, Time, image } = personDetails;
+const PersonDetails = ({ personDetails, personImages }) => {
+    const { ID, Name, Location, Date, Time } = personDetails;
+
+    let image = personImages[Name];
+    console.log(image)
+
+
     return (
         <div className='flex justify-between items-center gap-3'>
             <div>
@@ -38,6 +43,8 @@ const PersonDetails = ({ personDetails }) => {
                 </>
                 }
             </div>
+
+
         </div >
     );
 };
