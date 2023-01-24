@@ -18,13 +18,13 @@ const RightSideNav = ({ personData, showDetails }) => {
 
     const handleSelect = data => {
         setSelection(true)
-        console.log(data)
+        //console.log(data)
         setSelected(data)
     }
 
     const handleFilter = data => {
         setSort(true)
-        console.log(data)
+        //console.log(data)
         setFilter(data)
 
     }
