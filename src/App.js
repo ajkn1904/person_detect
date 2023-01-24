@@ -64,7 +64,7 @@ function App() {
           <RightSideNav personData={personData} showDetails={showDetails} className="flex-1 w-[25%]" />
         </>
 
-        <GetImages setPersonImages={setPersonImages} personImages={personImages} />
+        <GetImages setPersonImages={setPersonImages}/>
 
 
 

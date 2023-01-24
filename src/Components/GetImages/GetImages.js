@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { storage } from '../../Firebase/firebase.config';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
-const GetImages = ({setPersonImages, personImages}) => {
+const GetImages = ({setPersonImages}) => {
 
     const storageRef = ref(storage)
     const images = {}
