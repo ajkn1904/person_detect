@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2';
 import RightSideNavButton from '../Shared/RightSideNavButton/RightSideNavButton';
+import { format } from 'date-fns';
 
-const RightSideNav = ({ personData, showDetails, databaseRef, db }) => {
+const RightSideNav = ({ personData, showDetails }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState("Select");
@@ -26,11 +27,21 @@ const RightSideNav = ({ personData, showDetails, databaseRef, db }) => {
 
     }
 
+    const handleDate = e => {
+        setSort(true)
+        const dateValue = new Date(e.target.value);
+        const getDateFormat = format(dateValue, 'M/d/yy');
+        setFilter(getDateFormat);
+    }
+
     const handleResetFilter = () => {
-        //setIsOpen(!isOpen);
         setFilter("")
         setSort(false)
+        setSelected("")
     }
+
+
+
 
 
     return (
@@ -55,9 +66,14 @@ const RightSideNav = ({ personData, showDetails, databaseRef, db }) => {
 
                     }}>
                         <option defaultValue="Select">Select</option>
+                        {
+                            selected !== "selected" &&
+                            <>
                         <option value="gender">Gender</option>
                         <option value="location">Location</option>
                         <option value="date">Date</option>
+                        </>
+                        }
                     </select>
 
                     <button className='btn btn-circle btn-xs border-none text-black hover:text-red-600 hover:bg-transparent font-bold bg-transparent' onClick={handleResetFilter}>Reset</button>
@@ -71,17 +87,23 @@ const RightSideNav = ({ personData, showDetails, databaseRef, db }) => {
 
 
 
-            {isOpen && selected === "location" ?
+            {isOpen && filter !== "selected" && selected === "location" ?
                 <select className="select max-w-xs" onClick={e => {
                     handleFilter(e.target.value);
 
                 }}>
-                    <option defaultValue="Select">Select</option>
-                    {sort && <>
-                        <option value="Chennai">Chennai</option>
-                        <option value="Hyderabad">Hyderabad</option>
-                        <option value="Bangalore">Bangalore</option>
-                    </>
+                    {
+                        selected !== "selected" &&
+                        <>
+
+                            <option defaultValue="Select">Select</option>
+                            {sort && <>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Bangalore">Bangalore</option>
+                            </>
+                            }
+                        </>
                     }
                 </select>
 
@@ -96,11 +118,17 @@ const RightSideNav = ({ personData, showDetails, databaseRef, db }) => {
                     handleFilter(e.target.value);
 
                 }}>
-                    <option defaultValue="Select">Select</option>
-                    {sort && <>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </>
+                    {
+                        selected !== "selected" &&
+                        <>
+
+                            <option defaultValue="Select">Select</option>
+                            {sort && <>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </>
+                            }
+                        </>
                     }
                 </select>
 
@@ -110,21 +138,8 @@ const RightSideNav = ({ personData, showDetails, databaseRef, db }) => {
 
 
 
-            {isOpen && selected === "date" ?
-                <select className="select max-w-xs" onClick={e => {
-                    handleFilter(e.target.value);
-
-                }}>
-                    <option defaultValue="Select">Select</option>
-                    {sort && <>
-                    <option value="1/5/23">1/5/23</option>
-                    <option value="1/6/23">1/6/23</option>
-                    <option value="1/7/23">1/7/23</option>
-                    <option value="1/9/23">1/9/23</option>
-                    </>
-                }
-                </select>
-
+            {isOpen && filter !== "selected" && selected === "date" ?
+                <input type="date" className="select max-w-xs" onChange={handleDate} />
                 :
                 <></>
             }
