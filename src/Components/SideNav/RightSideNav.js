@@ -8,6 +8,7 @@ const RightSideNav = ({ personData, showDetails }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState("Select");
     const [filter, setFilter] = useState("Select");
+    const [selection, setSelection] = useState(false);
     const [sort, setSort] = useState(false);
 
 
@@ -15,12 +16,13 @@ const RightSideNav = ({ personData, showDetails }) => {
         setIsOpen(!isOpen);
     };
 
-    const handleSelect = (data) => {
+    const handleSelect = data => {
+        setSelection(true)
         console.log(data)
         setSelected(data)
     }
 
-    const handleFilter = (data) => {
+    const handleFilter = data => {
         setSort(true)
         console.log(data)
         setFilter(data)
@@ -36,8 +38,9 @@ const RightSideNav = ({ personData, showDetails }) => {
 
     const handleResetFilter = () => {
         setFilter("")
-        setSort(false)
         setSelected("")
+        setSelection(false)
+        setSort(false)
     }
 
 
@@ -59,7 +62,7 @@ const RightSideNav = ({ personData, showDetails }) => {
 
 
             {isOpen ?
-                <div className='flex justify-between items-center px-5'>
+                <div className='flex justify-between flex-col md:flex-row items-center px-5 mb-5'>
 
                     <select className="select max-w-xs" onClick={e => {
                         handleSelect(e.target.value);
@@ -67,14 +70,76 @@ const RightSideNav = ({ personData, showDetails }) => {
                     }}>
                         <option defaultValue="Select">Select</option>
                         {
-                            selected !== "selected" &&
+                            selection &&
                             <>
-                        <option value="gender">Gender</option>
-                        <option value="location">Location</option>
-                        <option value="date">Date</option>
-                        </>
+                                <option value="gender">Gender</option>
+                                <option value="location">Location</option>
+                                <option value="date">Date</option>
+                            </>
                         }
                     </select>
+
+                    <div>
+                        {isOpen && filter !== "selected" && selected === "location" ?
+                            <select className="select max-w-xs" onClick={e => {
+                                handleFilter(e.target.value);
+
+                            }}>
+                                {
+                                    selected !== "selected" &&
+                                    <>
+
+                                        <option defaultValue="Select">Select</option>
+                                        {sort && <>
+                                            <option value="Chennai">Chennai</option>
+                                            <option value="Hyderabad">Hyderabad</option>
+                                            <option value="Bangalore">Bangalore</option>
+                                        </>
+                                        }
+                                    </>
+                                }
+                            </select>
+
+                            :
+                            <></>
+                        }
+
+
+
+                        {isOpen && selected === "gender" ?
+                            <select className="select max-w-xs" onClick={e => {
+                                handleFilter(e.target.value);
+
+                            }}>
+                                {
+                                    selected !== "selected" &&
+                                    <>
+
+                                        <option defaultValue="Select">Select</option>
+                                        {sort && <>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </>
+                                        }
+                                    </>
+                                }
+                            </select>
+
+                            :
+                            <></>
+                        }
+
+
+
+                        {isOpen && filter !== "selected" && selected === "date" ?
+                            <input type="date" className="select max-w-xs" onChange={handleDate} />
+                            :
+                            <></>
+                        }
+
+
+
+                    </div>
 
                     <button className='btn btn-circle btn-xs border-none text-black hover:text-red-600 hover:bg-transparent font-bold bg-transparent' onClick={handleResetFilter}>Reset</button>
 
@@ -87,64 +152,6 @@ const RightSideNav = ({ personData, showDetails }) => {
 
 
 
-            {isOpen && filter !== "selected" && selected === "location" ?
-                <select className="select max-w-xs" onClick={e => {
-                    handleFilter(e.target.value);
-
-                }}>
-                    {
-                        selected !== "selected" &&
-                        <>
-
-                            <option defaultValue="Select">Select</option>
-                            {sort && <>
-                                <option value="Chennai">Chennai</option>
-                                <option value="Hyderabad">Hyderabad</option>
-                                <option value="Bangalore">Bangalore</option>
-                            </>
-                            }
-                        </>
-                    }
-                </select>
-
-                :
-                <></>
-            }
-
-
-
-            {isOpen && selected === "gender" ?
-                <select className="select max-w-xs" onClick={e => {
-                    handleFilter(e.target.value);
-
-                }}>
-                    {
-                        selected !== "selected" &&
-                        <>
-
-                            <option defaultValue="Select">Select</option>
-                            {sort && <>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </>
-                            }
-                        </>
-                    }
-                </select>
-
-                :
-                <></>
-            }
-
-
-
-            {isOpen && filter !== "selected" && selected === "date" ?
-                <input type="date" className="select max-w-xs" onChange={handleDate} />
-                :
-                <></>
-            }
-
-
 
 
             {
@@ -153,7 +160,7 @@ const RightSideNav = ({ personData, showDetails }) => {
 
                         {
                             sort && (filter === data.Location || filter === data.Gender || filter === data.Date) ?
-                            <div className='border w-[95%] h-28 md:h-20 mx-auto my-2 bg-gray-300 p-2 active:bg-gray-600 active:text-white' onClick={() => showDetails(data)}>
+                                <div className='border w-[95%] h-24 md:h-20 mx-auto my-2 bg-gray-300 p-2 active:bg-gray-600 active:text-white' onClick={() => showDetails(data)}>
                                     <RightSideNavButton data={data} />
                                 </div>
 
@@ -163,8 +170,8 @@ const RightSideNav = ({ personData, showDetails }) => {
                                     {
                                         (!sort) &&
                                         <div className='border w-[95%] h-24 md:h-20 mx-auto my-2 bg-gray-300 p-2 active:bg-gray-600 active:text-white' onClick={() => showDetails(data)}>
-                                    <RightSideNavButton data={data} />
-                                </div>
+                                            <RightSideNavButton data={data} />
+                                        </div>
                                     }
                                 </>
                         }

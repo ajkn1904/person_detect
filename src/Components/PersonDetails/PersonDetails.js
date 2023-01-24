@@ -20,26 +20,23 @@ const PersonDetails = ({ personDetails, personImages }) => {
                             <h2 className='text-2xl font-bold'>{ID}</h2>
                             <p className='font-bold text-xl'>Person Detected</p>
 
-                            <div className='my-10'>
-                                <table className="table-border-collapse border-0">
-                                    <tbody>
-                                        <tr>
-                                            <td>Name : {Name}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Location : {Location}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Date : {Date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Time : {Time}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div className='my-10 flex justify-between items-center w-52 text-xl'>
+                                
+                                <div>
+                                    <p>Name</p>
+                                    <p>Location</p>
+                                    <p>Date</p>
+                                    <p>Time</p>
+                                </div>
+                                <div>
+                                    <p>: {Name}</p>
+                                    <p>: {Location}</p>
+                                    <p>: {Date}</p>
+                                    <p>: {Time}</p>
+                                </div>
 
                             </div>
-                            <p className='w-36'>Description: {Name} detected at {Location} on {Date}.</p>
+                            <p className='w-52 text-xl'>Description: {Name} detected at {Location} on {Date}.</p>
                         </div>
 
                         <div>
