@@ -4,7 +4,7 @@ const PersonDetails = ({ personDetails, personImages }) => {
     const { ID, Name, Location, Date, Time } = personDetails;
 
     let image = personImages[Name];
-    console.log(image)
+    //console.log(image)
 
 
     return (

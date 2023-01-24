@@ -24,6 +24,8 @@ function App() {
   
   //let personId = {};
 
+
+
   useEffect(() => {
 
     const unsubscribe = onValue(databaseRef, (snapshot) => {
@@ -32,6 +34,9 @@ function App() {
     return () => unsubscribe();
 
   }, []);
+
+
+
 
   console.log(personData)
 
@@ -44,7 +49,7 @@ function App() {
   }
 
 
-  console.log(personDetails)
+  //console.log(personDetails)
 
 
 
@@ -53,10 +58,20 @@ function App() {
       <Header />
 
       <div className='flex justify-between'>
+        
+        
         <LeftSideNav />
+        
+
         <PersonDetails personDetails={personDetails} personImages={personImages}/>
-        <RightSideNav personData={personData} showDetails={showDetails} personImages={personImages} className="h-screen" />
+        
+
+        <RightSideNav personData={personData} showDetails={showDetails} personImages={personImages}  setPersonData={setPersonData} databaseRef={databaseRef} db={db} className="h-screen" />
+        
+
         <GetImages setPersonImages={setPersonImages} personImages={personImages} />
+
+
 
       </div>
     </div>
