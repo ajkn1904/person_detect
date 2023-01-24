@@ -55,14 +55,14 @@ function App() {
       <div className='flex justify-between'>
 
 
-        <LeftSideNav />
+        <LeftSideNav className="flex-none" />
+
+        <>
+          <PersonDetails personDetails={personDetails} personImages={personImages} className="flex-1 w-full" />
 
 
-        <PersonDetails personDetails={personDetails} personImages={personImages} />
-
-
-        <RightSideNav personData={personData} showDetails={showDetails} className="h-screen" />
-
+          <RightSideNav personData={personData} showDetails={showDetails} className="flex-1 w-[25%]" />
+        </>
 
         <GetImages setPersonImages={setPersonImages} personImages={personImages} />
 
