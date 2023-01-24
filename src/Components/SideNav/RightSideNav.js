@@ -45,7 +45,7 @@ const RightSideNav = ({ personData, showDetails }) => {
 
 
     return (
-        <div className='border-2 border-gray-300 overflow-y-auto h-[90vh] scrollbar-hide w-96'>
+        <div className='border-8 border-gray-300 overflow-y-auto h-[91vh] scrollbar-hide w-96'>
             <div className='flex justify-between items-center px-2'>
                 <h2 className='font-bold text-2xl pt-3 pb-5'>Events</h2>
 
@@ -153,16 +153,18 @@ const RightSideNav = ({ personData, showDetails }) => {
 
                         {
                             sort && (filter === data.Location || filter === data.Gender || filter === data.Date) ?
-                                <>
-                                    <RightSideNavButton showDetails={showDetails} data={data} />
-                                </>
+                            <div className='border w-[95%] h-28 md:h-20 mx-auto my-2 bg-gray-300 p-2 active:bg-gray-600 active:text-white' onClick={() => showDetails(data)}>
+                                    <RightSideNavButton data={data} />
+                                </div>
 
                                 :
 
                                 <>
                                     {
                                         (!sort) &&
-                                        <RightSideNavButton showDetails={showDetails} data={data} />
+                                        <div className='border w-[95%] h-24 md:h-20 mx-auto my-2 bg-gray-300 p-2 active:bg-gray-600 active:text-white' onClick={() => showDetails(data)}>
+                                    <RightSideNavButton data={data} />
+                                </div>
                                     }
                                 </>
                         }

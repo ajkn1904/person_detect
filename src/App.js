@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './Components/Header/Header';
-import database from './Firebase/firebase.config';
 import { getDatabase, onValue, ref } from 'firebase/database';
-
-//import { doc, getDoc } from "firebase/firestore";
 
 
 import LeftSideNav from './Components/SideNav/LeftSideNav';
@@ -18,10 +15,10 @@ function App() {
 
   const [personData, setPersonData] = useState([]);
   const [personDetails, setPersonDetails] = useState([]);
- const [personImages, setPersonImages] = useState({});
+  const [personImages, setPersonImages] = useState({});
 
   const databaseRef = ref(db);
-  
+
   //let personId = {};
 
 
@@ -35,14 +32,12 @@ function App() {
 
   }, []);
 
+  //console.log(personData)
 
 
-
-  console.log(personData)
 
 
   const showDetails = data => {
-    //console.log(id)
     setPersonDetails(data)
 
 
@@ -55,19 +50,19 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header personData={personData} />
 
       <div className='flex justify-between'>
-        
-        
+
+
         <LeftSideNav />
-        
 
-        <PersonDetails personDetails={personDetails} personImages={personImages}/>
-        
 
-        <RightSideNav personData={personData} showDetails={showDetails} personImages={personImages}  setPersonData={setPersonData} databaseRef={databaseRef} db={db} className="h-screen" />
-        
+        <PersonDetails personDetails={personDetails} personImages={personImages} />
+
+
+        <RightSideNav personData={personData} showDetails={showDetails} className="h-screen" />
+
 
         <GetImages setPersonImages={setPersonImages} personImages={personImages} />
 
